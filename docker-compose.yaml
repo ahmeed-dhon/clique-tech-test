@@ -43,7 +43,7 @@ services:
     user: root
     volumes:
       - filebeatdata01:/usr/share/filebeat/data
-      - "/home/user/service-logs/:/usr/share/filebeat/ingest_data/"
+      - "./service-log/:/usr/share/filebeat/ingest_data/"
       - "./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro"
     environment:
       - ELASTIC_USER=elastic

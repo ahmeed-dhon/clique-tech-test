@@ -55,7 +55,7 @@
     {
       "datasource": {
         "type": "elasticsearch",
-        "uid": "${DS_SERVICE-DUMMY-LOG}"
+        "uid": "esdatasource"
       },
       "fieldConfig": {
         "defaults": {
@@ -145,7 +145,7 @@
           ],
           "datasource": {
             "type": "elasticsearch",
-            "uid": "${DS_SERVICE-DUMMY-LOG}"
+            "uid": "esdatasource"
           },
           "metrics": [
             {

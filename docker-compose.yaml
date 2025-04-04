@@ -12,7 +12,7 @@ services:
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
       - bootstrap.memory_lock=true
       - xpack.security.enabled=false
-      - xpack.security.audit.enabled=true
+      - xpack.security.audit.enabled=false
     mem_limit: ${MEM_LIMIT}
     ulimits:
       memlock:
@@ -35,23 +35,20 @@ services:
       - SERVER_PUBLICBASEURL=http://localhost:5601
     mem_limit: ${MEM_LIMIT}
 
-  filebeat01:
+  logstash01:
     depends_on:
-      es01:
-        condition: service_healthy
-    image: docker.elastic.co/beats/filebeat:${STACK_VERSION}
+      - es01
+    image: docker.elastic.co/logstash/logstash:${STACK_VERSION}
     user: root
     volumes:
-      - filebeatdata01:/usr/share/filebeat/data
-      - "./service-log/:/usr/share/filebeat/ingest_data/"
-      - "./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro"
+      - logstashdata01:/usr/share/logstash/data
+      - "./service_log/:/usr/share/logstash/ingest_data/"
+      - "./logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro"
     environment:
+      - xpack.monitoring.enabled=false
       - ELASTIC_USER=elastic
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
-      - ELASTIC_HOSTS=https://es01:9200
-      - KIBANA_HOSTS=https://kibana:5601
-    command:
-      -strict.perms=false
+      - ELASTIC_HOSTS=http://es01:9200
 
   grafana:
     image: grafana/grafana:11.1.4
@@ -60,6 +57,7 @@ services:
       - "3000:3000"
     volumes:
       - "./grafana_conf/provisioning:/etc/grafana/provisioning"
+      - "./grafana_conf/dashboards:/var/lib/grafana/dashboards"
       - "./grafana_conf/config/grafana.ini:/etc/grafana/grafana.ini"
 
 volumes:
@@ -67,5 +65,5 @@ volumes:
     driver: local
   kibanadata:
     driver: local
-  filebeatdata01:
+  logstashdata01:
     driver: local

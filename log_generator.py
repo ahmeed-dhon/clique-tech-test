@@ -4,7 +4,7 @@ import time
 
 def print_log(entry):
     logger = logging.getLogger(__name__)
-    handler = logging.FileHandler("log_file.log")
+    handler = logging.FileHandler("./service_log/log_file.log")
     formatter = logging.Formatter(
         "%(asctime)s : %(name)s  : %(funcName)s : %(levelname)s : %(message)s"
     )

@@ -1,0 +1,5 @@
+---
+- name: Run Python log generator
+  shell: |
+    cd /home/user/clique-test/
+    python3 log_generator.py &

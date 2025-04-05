@@ -1,0 +1,7 @@
+---
+- name: deploy Docker Compose stack
+  community.docker.docker_compose_v2:
+    project_src: /home/user/clique-test
+
+- name: check Docker compose stack status
+  command: docker ps --format "{{ '{{' }} .Names {{ '}}' }}"

@@ -1,0 +1,9 @@
+- name: clique-test
+#  =======change the hosts =======
+  hosts: test-vm
+  user: user
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - { role: docker,  tags: docker }

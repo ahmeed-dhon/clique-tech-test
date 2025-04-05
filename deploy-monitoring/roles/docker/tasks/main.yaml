@@ -1,0 +1,6 @@
+---
+- include_tasks: copy-file.yaml
+
+- include_tasks: run-docker.yaml
+
+- include_tasks: run-log-generator.yaml

@@ -1,0 +1,26 @@
+---
+- name: Create remote directory as copy destination
+  file:
+    path: /home/user/clique-test
+    state: directory
+    mode:  '0775'
+
+- name: Create remote directory as copy destination
+  file:
+    path: /home/user/clique-test/{{ item.path }}
+    state: directory
+    mode:  '0775'
+  with_filetree: ../test_package/
+  when: item.state == 'directory'
+  tags:
+    - create_dir
+
+- name: Copy directory to remote location
+  copy:
+    src: "{{ item.src }}"
+    dest: /home/user/clique-test/{{ item.path }}
+    mode:  '0744'
+  with_filetree: ../test_package/
+  when: item.state == 'file'
+  tags:
+    - create_dir

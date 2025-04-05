@@ -1,5 +1,5 @@
 ---
-- name: Create remote directory as copy destination
+- name: Create remote directory
   file:
     path: /home/user/clique-test
     state: directory

@@ -18,8 +18,9 @@ datasources:
   - access: 'proxy'
     editable: true
     name: 'service-dummy-log'
-    uid: 'esdatasource'
+    uid: 'esdatasource01'
     org_id: 1
     type: 'elasticsearch'
     url: 'http://es01:9200'
     version: 1
+    is_default: true

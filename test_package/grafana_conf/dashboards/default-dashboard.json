@@ -55,7 +55,7 @@
     {
       "datasource": {
         "type": "elasticsearch",
-        "uid": "esdatasource"
+        "uid": "esdatasource01"
       },
       "fieldConfig": {
         "defaults": {
